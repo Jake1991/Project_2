@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'questions',
     'mysite',
+    'dashboard',
 )
 
 MIDDLEWARE_CLASSES = (

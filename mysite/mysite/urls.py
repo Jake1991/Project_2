@@ -16,9 +16,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from dashboard.views import dashboard
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'questions/', include('questions.urls')),
+    url(r'dashboard/', dashboard),
     url(r'^login/$', 'django.contrib.auth.views.login',name="login"),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login',name="login")
 ]

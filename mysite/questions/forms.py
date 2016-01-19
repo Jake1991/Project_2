@@ -18,3 +18,9 @@ class QuestionForm(forms.Form):
 		QUESTION = question
 		self.fields['problem'].initial = question
 		self.fields['answers'].choices = CHOICES_2
+
+class InputQuestionForm(forms.Form):
+	question_text = forms.CharField(label='Question Text')
+	answer = forms.CharField(max_length=100)
+	dummy_answer_a = forms.CharField(max_length=100)
+	dummy_answer_b = forms.CharField(max_length=100)

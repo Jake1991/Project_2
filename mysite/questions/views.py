@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from questions.utils import generate_problem, check_solution
-from questions.forms import QuestionForm
+from questions.forms import QuestionForm, InputQuestionForm
 from questions.models import UserSession, DayScore
 
 
@@ -49,3 +49,13 @@ def update_score(user, is_correct):
 		dayscore = DayScore.objects.get_or_create(user=user, date=datetime.date.today())[0]
 		dayscore.score = session.score
 		dayscore.save()
+
+def input_question(request):
+	if request.method == 'POST':
+		return HttpResponse('Not ready yet')
+		data = request.POST
+		SimpleQuestion.objects.create(data.question_text, XXXXXXX)
+
+	else:
+		form = InputQuestionForm()
+	return render(request, 'input.html', {'form': form})
