@@ -1,6 +1,8 @@
 from random import choice, shuffle
 import copy
 
+from .models import SimpleQuestion
+
 multiple_choice = {
                      "Differentiate x^2": ["2x", "x", "3x"],
                      "Integrate x^2": ["x^3/3 + c", "2x", "pi"],
@@ -8,11 +10,16 @@ multiple_choice = {
                      }
 
 def generate_problem(problem_type=None):
-	if problem_type == "multiple_choice":
+	'''if problem_type == "multiple_choice":
 		problem = choice(list(multiple_choice))
 		solutions = copy.deepcopy(multiple_choice[problem])
 		shuffle(solutions)
-		return problem, solutions
+		return problem, solutions'''
+
+	question_query = SimpleQuestion.objects.order_by('?').first()
+	question = question_query.question_text
+	solutions = [question_query.answer, question_query.dummy_answer_a, question_query.dummy_answer_b]
+	return question, solutions
 
 def check_solution(problem, subbed_solution, problem_type=None):
 	solution = multiple_choice.get(problem)[0]

@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from questions.utils import generate_problem, check_solution
 from questions.forms import QuestionForm
-from questions.models import UserSession
-from django.contrib.auth.decorators import login_required
+from questions.models import UserSession, DayScore
+
 
 import datetime
 # Create your views here.
@@ -28,7 +29,7 @@ def solution(request):
 	return render(request, 'verify.html', context=context)
 
 def get_user(request):
-	return User.objects.get(username='test_user')
+	return User.objects.get(username=request.user)
 
 def get_score(user):
 	session = UserSession.objects.get_or_create(user_id=user.id)[0]
@@ -40,8 +41,11 @@ def get_score(user):
 
 def update_score(user, is_correct):
 	#needs changing
-	session = UserSession.objects.get_or_create(user_id=0)[0]
+	session = UserSession.objects.get_or_create(user_id=user.id)[0]
 	if is_correct:
 		session.score += 1
 		session.last_updated = datetime.date.today()
 		session.save()
+		dayscore = DayScore.objects.get_or_create(user=user, date=datetime.date.today())[0]
+		dayscore.score = session.score
+		dayscore.save()

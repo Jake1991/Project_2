@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'questions/', include('questions.urls'))
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'questions/', include('questions.urls')),
+    url(r'^login/$', 'django.contrib.auth.views.login',name="login"),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login',name="login")
+]
