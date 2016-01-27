@@ -1,5 +1,9 @@
-<form action="/input/" method="post">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'questions/bootstrap.css' %}">
+<form action="/questions/input/" method="post">
     {% csrf_token %}
-    {{ form }}
+    <table>
+    	{{ form.as_table }}
+	</table>
     <input type="submit" value="Submit" />
 </form>

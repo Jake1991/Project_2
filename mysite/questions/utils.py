@@ -53,18 +53,4 @@ def give_problem(problem, solutions):
 		label = str(label) + ". " + this_solution
 		print(label)
 	return solution_index
-	
-
-'''
-problem, solutions = generate_problem("multiple_choice")
-
-solution_index = give_problem(problem, solutions)
-
-user_solution = ask_for_solution()
-
-if user_solution == str(solution_index):
-	print ("You are winner!")
-else:
-	print("U R s2pid")
-'''
 
