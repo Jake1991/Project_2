@@ -61,5 +61,7 @@ def input_question(request):
 			)
 		question_created = True
 
+	else:
+		question_created = False
 	form = InputQuestionForm()
 	return render(request, 'input.html', {'form': form, 'question_created': question_created})

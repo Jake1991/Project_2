@@ -18,14 +18,17 @@ def generate_problem(problem_type=None):
 
 	question_query = SimpleQuestion.objects.order_by('?').first()
 	question = question_query.question_text
-	solutions = [question_query.answer, question_query.dummy_answer_a, question_query.dummy_answer_b]
+	solutions = [
+		question_query.answer,
+		question_query.dummy_answer_a,
+		question_query.dummy_answer_b,
+		]
 	return question, solutions
 
 def check_solution(problem, subbed_solution, problem_type=None):
-	solution = multiple_choice.get(problem)[0]
-	print(problem)
-	print(solution)
-	print(subbed_solution)
+
+	solution = SimpleQuestion.objects.get(question_text=problem).answer
+
 	if subbed_solution == solution:
 		return True
 	else:
