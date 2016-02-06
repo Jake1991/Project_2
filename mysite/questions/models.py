@@ -13,10 +13,21 @@ class DayScore(models.Model):
 	score = models.IntegerField(default=0)
 
 class SimpleQuestion(models.Model):
+	def __unicode__(self):
+		return self.question_text
 	question_text = models.TextField()
 	answer = models.CharField(max_length=100)
 	dummy_answer_a = models.CharField(max_length=100)
 	dummy_answer_b = models.CharField(max_length=100)
+
+
+class MultiStageQuestion(models.Model):
+	part_one = models.ManyToManyField(SimpleQuestion, default=None, related_name='part_one')
+	part_two = models.ManyToManyField(SimpleQuestion, default=None, related_name='part_two')
+	part_three = models.ManyToManyField(SimpleQuestion, default=None, related_name='part_thre')
+	part_four = models.ManyToManyField(SimpleQuestion, default=None, related_name='part_four')
+	part_five = models.ManyToManyField(SimpleQuestion, default=None, related_name='part_five')
+
 
 
 

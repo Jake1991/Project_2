@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from dashboard.views import dashboard
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -24,4 +25,6 @@ urlpatterns = [
     url(r'dashboard/', dashboard),
     url(r'^login/$', 'django.contrib.auth.views.login',name="login"),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login',name="login")
+    url(r'^login/$', auth_views.login,name="login"),
+    url(r'^accounts/login/$', auth_views.login,name="login")
 ]
